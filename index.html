@@ -334,11 +334,8 @@
   #page-sectors  .section-title { border-bottom-color: var(--tab-sectors-dim); }
   #page-winners  .section-title { border-bottom-color: var(--tab-winners-dim); }
 
-  /* Winners signal cards — use gold accent */
-  #page-winners .amber-accent::before { background: var(--tab-winners-gold); }
-  #page-winners .dna-val-amber        { color: var(--tab-winners-gold); }  /* override: in winners context, amber = gold */
+  /* Winners page: KPI/leaderboard/combo numbers use gold (these are winner-tier metrics, not fund-specific) */
   #page-winners .winner-kpi-val       { color: var(--tab-winners-gold); }
-  #page-winners .fund-combo-count     { color: var(--tab-winners-gold); }
   #page-winners .trophy-raised        { color: var(--tab-winners-gold); }
 
   /* Overview tab key-finding color dots */
@@ -512,6 +509,7 @@
   .dna-card.green-accent::before { background: var(--tab-angels); }
   .dna-card.purple-accent::before { background: var(--tab-sectors); }
   .dna-card.red-accent::before { background: var(--red); }
+  .dna-card.gold-accent::before { background: var(--tab-winners-gold); }
   .dna-icon { font-size: 20px; margin-bottom: .5rem; }
   .dna-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: .35rem; }
   .dna-val { font-size: 22px; font-weight: 700; letter-spacing: -.02em; color: var(--ink); margin-bottom: .25rem; line-height: 1; }
@@ -651,7 +649,7 @@
     <div class="chart-wrap" style="height:210px;">
       <canvas id="overviewSectorChart" role="img" aria-label="Horizontal bar chart of company counts by sector">AI/ML leads with 516 companies, followed by FinTech/Crypto at 235.</canvas>
     </div>
-    <div style="margin-top:.75rem;font-size:12px;color:var(--ink-3)">AI/ML is the dominant sector at 37% of the dataset — nearly double FinTech/Crypto in second place. HealthTech and Cybersecurity are closely matched at ~150 companies each.</div>
+    <div style="margin-top:.75rem;font-size:12px;color:var(--ink-3)">AI/ML is the dominant sector at 37% of the dataset — nearly double FinTech/Crypto in second place.</div>
   </div>
 
   <!-- KEY FINDINGS ACROSS ALL TABS -->
@@ -662,7 +660,7 @@
     <div style="margin-bottom:.5rem;font-size:12px;font-weight:600;color:var(--ink-2);display:flex;align-items:center;gap:8px">
       <span style="width:8px;height:8px;border-radius:50%;background:var(--tab-founders);display:inline-block"></span>
       Founder profiles
-      <span style="font-size:11px;font-weight:400;color:var(--ink-4)">→ see Founder profiles tab for full detail</span>
+      <span onclick="showPage('founders')" style="font-size:11px;font-weight:600;color:var(--tab-founders);cursor:pointer;text-decoration:underline;text-underline-offset:2px">→ see Founder profiles tab for full detail</span>
     </div>
     <div class="three-col" style="margin-bottom:1.5rem">
       <div class="card">
@@ -686,18 +684,18 @@
     <div style="margin-bottom:.5rem;font-size:12px;font-weight:600;color:var(--ink-2);display:flex;align-items:center;gap:8px">
       <span style="width:8px;height:8px;border-radius:50%;background:var(--tab-funds);display:inline-block"></span>
       Fund analysis
-      <span style="font-size:11px;font-weight:400;color:var(--ink-4)">→ see Fund analysis tab for full detail</span>
+      <span onclick="showPage('funds')" style="font-size:11px;font-weight:600;color:var(--tab-funds);cursor:pointer;text-decoration:underline;text-underline-offset:2px">→ see Fund analysis tab for full detail</span>
     </div>
     <div class="three-col" style="margin-bottom:1.5rem">
       <div class="card">
         <div class="card-title">a16z leads volume; Lightspeed leads quality</div>
-        <div class="card-body">Andreessen Horowitz has the most companies (413) but Lightspeed's portfolio averages $128M raised per company — the highest of any fund. Different theses, both winning.</div>
+        <div class="card-body">Andreessen Horowitz has the most companies (413) but Lightspeed's portfolio averages $128M raised per company — the highest of any fund. Different theses, both effective.</div>
         <div class="chips"><span class="chip chip-funds">a16z: 413 cos</span><span class="chip chip-funds">Lightspeed: $128M avg</span></div>
       </div>
       <div class="card">
         <div class="card-title">General Catalyst owns HealthTech</div>
         <div class="card-body">GC leads HealthTech with 56 companies — nearly double second-place a16z at 38. Also leads CleanTech. The only fund with dominant positions in two separate sectors.</div>
-        <div class="chips"><span class="chip chip-funds">HealthTech #1</span><span class="chip chip-sectors">CleanTech #1</span></div>
+        <div class="chips"><span class="chip chip-sectors">HealthTech #1</span><span class="chip chip-sectors">CleanTech #1</span></div>
       </div>
       <div class="card">
         <div class="card-title">Cybersecurity has no clear winner</div>
@@ -710,7 +708,7 @@
     <div style="margin-bottom:.5rem;font-size:12px;font-weight:600;color:var(--ink-2);display:flex;align-items:center;gap:8px">
       <span style="width:8px;height:8px;border-radius:50%;background:var(--tab-angels);display:inline-block"></span>
       Angel investors
-      <span style="font-size:11px;font-weight:400;color:var(--ink-4)">→ see Angel investors tab for full detail</span>
+      <span onclick="showPage('angels')" style="font-size:11px;font-weight:600;color:var(--tab-angels);cursor:pointer;text-decoration:underline;text-underline-offset:2px">→ see Angel investors tab for full detail</span>
     </div>
     <div class="three-col" style="margin-bottom:1.5rem">
       <div class="card">
@@ -734,7 +732,7 @@
     <div style="margin-bottom:.5rem;font-size:12px;font-weight:600;color:var(--ink-2);display:flex;align-items:center;gap:8px">
       <span style="width:8px;height:8px;border-radius:50%;background:var(--tab-sectors);display:inline-block"></span>
       Sectors
-      <span style="font-size:11px;font-weight:400;color:var(--ink-4)">→ see Sectors tab for full detail</span>
+      <span onclick="showPage('sectors')" style="font-size:11px;font-weight:600;color:var(--tab-sectors);cursor:pointer;text-decoration:underline;text-underline-offset:2px">→ see Sectors tab for full detail</span>
     </div>
     <div class="three-col" style="margin-bottom:1.5rem">
       <div class="card">
@@ -758,7 +756,7 @@
     <div style="margin-bottom:.5rem;font-size:12px;font-weight:600;color:var(--ink-2);display:flex;align-items:center;gap:8px">
       <span style="width:8px;height:8px;border-radius:50%;background:var(--tab-winners-gold);display:inline-block"></span>
       Winners
-      <span style="font-size:11px;font-weight:400;color:var(--ink-4)">→ see Winners tab for the full anatomy</span>
+      <span onclick="showPage('winners')" style="font-size:11px;font-weight:600;color:var(--tab-winners-gold);cursor:pointer;text-decoration:underline;text-underline-offset:2px">→ see Winners tab for the full anatomy</span>
     </div>
     <div class="card" style="border-color:var(--tab-winners-gold);border-width:1.5px">
       <div class="card-title">The 3 signals that separate winners from everyone else</div>
@@ -775,7 +773,7 @@
         <span class="chip chip-funds">20 avg investors</span>
         <span class="chip chip-founders">5.4× alumni density</span>
         <span class="chip chip-founders">104% headcount growth</span>
-        <span class="chip chip-winners">→ Winners tab</span>
+        <span class="chip chip-winners" onclick="showPage('winners')" style="cursor:pointer">→ Winners tab</span>
       </div>
     </div>
   </div>
@@ -918,8 +916,8 @@
 
   <div class="hero" style="padding-bottom:2rem">
     <div class="hero-eyebrow" style="color:var(--tab-funds)">Fund analysis · 1,390 companies</div><div class="color-legend">Color guide: <span class="color-legend-item cl-founders"><span class="legend-dot" style="background:var(--tab-founders)"></span>Founder signal</span><span class="color-legend-item cl-funds"><span class="legend-dot" style="background:var(--tab-funds)"></span>Fund signal</span><span class="color-legend-item cl-sectors"><span class="legend-dot" style="background:var(--tab-sectors)"></span>Sector signal</span></div>
-    <h1 class="hero-title" style="font-size:clamp(1.6rem,3vw,2.2rem)">Which funds back<br>the most companies — and winners?</h1>
-    <p class="hero-sub">Each section compares fund behavior across the full dataset vs. their presence specifically in $100M+ funded companies. Volume and quality tell different stories.</p>
+    <h1 class="hero-title" style="font-size:clamp(1.6rem,3vw,2.2rem)">Which funds back<br>the most companies — and the most capital?</h1>
+    <p class="hero-sub">Each section compares fund behavior across the full dataset vs. their presence specifically in $50M+ funded companies. Volume and quality tell different stories.</p>
   </div>
 
   <!-- SECTION 1: fund volume vs quality -->
@@ -927,7 +925,7 @@
     <div class="section-header"><div class="section-title">Fund reach and portfolio quality</div></div>
     <div class="two-part-header">
       <div class="two-part-label all-label">Across the full dataset <span class="two-part-n">n = 1,390</span></div>
-      <div class="two-part-label win-label">In winning companies <span class="win-def-tip">$100M+ funded · n = 160</span></div>
+      <div class="two-part-label win-label">In high-funded companies <span class="win-def-tip">$50M+ funded · n = 300</span></div>
     </div>
     <div class="two-part-grid">
       <div class="two-part-panel all-panel">
@@ -952,7 +950,7 @@
     <div class="section-header"><div class="section-title">Entry stage strategy</div></div>
     <div class="two-part-header">
       <div class="two-part-label all-label">When funds enter — full portfolio</div>
-      <div class="two-part-label win-label">Stage patterns in winning companies</div>
+      <div class="two-part-label win-label">What this means for $50M+ high-funded companies</div>
     </div>
     <div class="two-part-grid">
       <div class="two-part-panel all-panel">
@@ -968,10 +966,10 @@
         <div style="margin-top:.75rem;font-size:12px;color:var(--ink-3)">Khosla is the most seed-heavy at 41% of its portfolio at Seed stage — the highest ratio. a16z and GC both run broad stage coverage, entering at all three levels.</div>
       </div>
       <div class="two-part-panel win-panel">
-        <div class="two-part-panel-title">What entry stage means for winners</div>
+        <div class="two-part-panel-title">What entry stage means for high-funded companies</div>
         <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:.75rem">
           <div class="card" style="padding:.85rem 1rem">
-            <div class="card-title" style="font-size:13px">Khosla's seed thesis produces outsized winners</div>
+            <div class="card-title" style="font-size:13px">Khosla's seed thesis produces outsized hits</div>
             <div class="card-body" style="font-size:12px">Entering earliest = most upside exposure. Khosla's 41% seed ratio, combined with 5 grant-backed bets, reflects a willingness to fund unproven science that larger funds won't touch. When it works, the returns are asymmetric.</div>
           </div>
           <div class="card" style="padding:.85rem 1rem">
@@ -979,7 +977,7 @@
             <div class="card-body" style="font-size:12px">More Series B+ entries means Lightspeed is writing larger checks into already-proven companies. Higher average funding per company is partly a cause and partly an effect of this later-stage skew.</div>
           </div>
           <div class="card" style="padding:.85rem 1rem">
-            <div class="card-title" style="font-size:13px">a16z's broad-stage presence creates the most diverse winner portfolio</div>
+            <div class="card-title" style="font-size:13px">a16z's broad-stage presence creates the most diverse high-funded portfolio</div>
             <div class="card-body" style="font-size:12px">By entering at all stages, a16z maximizes surface area. Its 109 companies in the $50M+ tier span every sector — a portfolio breadth no other fund matches.</div>
           </div>
         </div>
@@ -992,7 +990,7 @@
     <div class="section-header"><div class="section-title">Sector specialization</div></div>
     <div class="two-part-header">
       <div class="two-part-label all-label">Fund sector coverage — full dataset</div>
-      <div class="two-part-label win-label">Sector leadership in winning companies</div>
+      <div class="two-part-label win-label">Sector leadership in high-funded companies</div>
     </div>
     <div class="two-part-grid">
       <div class="two-part-panel all-panel">
@@ -1012,7 +1010,7 @@
         <div class="two-part-panel-title">Specialist funds punching above their weight</div>
         <div class="card" style="margin-bottom:.6rem">
           <div class="card-title">Cerca Partners — Cybersecurity specialist</div>
-          <div class="card-body" style="font-size:12px">Top-5 presence in the Cybersecurity $50M+ cohort despite being a small fund. Deep sector expertise over broad coverage. The fund to watch if you're tracking security winners early.</div>
+          <div class="card-body" style="font-size:12px">Top-5 presence in the Cybersecurity $50M+ cohort despite being a small fund. Deep sector expertise over broad coverage. The fund to watch if you're tracking high-funded security companies early.</div>
           <div class="chips"><span class="chip chip-sectors">Cybersecurity</span><span class="chip chip-funds">Specialist fund</span></div>
         </div>
         <div class="card" style="margin-bottom:.6rem">
@@ -1039,7 +1037,7 @@
   <div class="hero" style="padding-bottom:2rem">
     <div class="hero-eyebrow" style="color:var(--tab-angels)">Angel investors · 1,390 companies</div><div class="color-legend">Color guide: <span class="color-legend-item cl-founders"><span class="legend-dot" style="background:var(--tab-founders)"></span>Founder signal</span><span class="color-legend-item cl-funds"><span class="legend-dot" style="background:var(--tab-funds)"></span>Fund signal</span><span class="color-legend-item cl-angels"><span class="legend-dot" style="background:var(--tab-angels)"></span>Angel signal</span></div>
     <h1 class="hero-title" style="font-size:clamp(1.6rem,3vw,2.2rem)">Who are the most<br>connected individuals?</h1>
-    <p class="hero-sub">Volume tells you who writes the most checks. Quality — concentration in winning companies — tells you whose judgment predicts outcomes. The two lists are very different.</p>
+    <p class="hero-sub">Volume tells you who writes the most checks. Quality — concentration in high-funded companies — tells you whose judgment predicts outcomes. The two lists are very different.</p>
   </div>
 
   <!-- SECTION 1: volume vs quality -->
@@ -1061,7 +1059,7 @@
         <div class="two-part-panel-title">Most companies in $50M+ cohort (quality)</div>
         <div class="bar-list" id="angel-hf-bars"></div>
         <div class="insight" style="border-left-color:var(--tab-angels);margin-top:.75rem">
-          <div class="insight-title">Eric Schmidt has the highest concentration in winners despite lower volume</div>
+          <div class="insight-title">Eric Schmidt has the highest concentration in high-funded companies despite lower volume</div>
           <div class="insight-body">13 companies in the $50M+ cohort from a smaller total portfolio — a higher hit rate than any volume player. His signal is quality, not quantity. When Schmidt backs a company, it's meaningful.</div>
         </div>
       </div>
@@ -1073,7 +1071,7 @@
     <div class="section-header"><div class="section-title">Angel investor profiles</div></div>
     <div class="two-part-header">
       <div class="two-part-label all-label">What each angel typically backs</div>
-      <div class="two-part-label win-label">What makes them a signal in winners</div>
+      <div class="two-part-label win-label">What makes them a signal in high-funded companies</div>
     </div>
     <div class="two-part-grid">
       <div class="two-part-panel all-panel">
@@ -1095,7 +1093,7 @@
         </div>
       </div>
       <div class="two-part-panel win-panel">
-        <div class="two-part-panel-title">Why these angels appear in winners</div>
+        <div class="two-part-panel-title">Why these angels appear in high-funded companies</div>
         <div class="card" style="margin-bottom:.6rem">
           <div class="card-title">Nat Friedman + Daniel Gross — Highest quality AI signal</div>
           <div class="card-sub">12 and 9 companies in $50M+ cohort · often co-invest via AI Grant</div>
@@ -1106,7 +1104,7 @@
           <div class="card-title">Eric Schmidt — Strategic credibility</div>
           <div class="card-sub">13 in $50M+ cohort · AI infrastructure + Defense</div>
           <div class="card-body" style="font-size:12px">Exclusively AI infrastructure and Defense/Space. His presence unlocks government relationships, enterprise introductions, and credibility that no check size alone can buy. Highest concentration ratio among individuals.</div>
-          <div class="chips"><span class="chip chip-winners">Highest winner ratio</span></div>
+          <div class="chips"><span class="chip chip-winners">Highest concentration ratio</span></div>
         </div>
         <div class="card">
           <div class="card-title">Jeff Dean — Technical legitimacy</div>
@@ -1141,13 +1139,13 @@
     <div class="two-part-grid">
       <div class="two-part-panel all-panel">
         <div class="two-part-panel-title">Where founders are building</div>
-        <div class="chart-wrap" style="height:230px;"><canvas id="overviewSectorChart"></canvas></div>
-        <div style="margin-top:.75rem;font-size:12px;color:var(--ink-3)">AI/ML dominates at 37% of all companies. FinTech/Crypto (17%) and HealthTech/Cybersecurity (~11% each) round out the top sectors.</div>
+        <div class="chart-wrap" style="height:230px;"><canvas id="sectorsAllChart"></canvas></div>
+        <div style="margin-top:.75rem;font-size:12px;color:var(--ink-3)">AI/ML dominates at 37% of all companies. FinTech/Crypto (17%) is a distant second; HealthTech (11%) and Cybersecurity (10%) are closely matched for fourth and fifth.</div>
       </div>
       <div class="two-part-panel win-panel">
         <div class="two-part-panel-title">Where winners are clustering</div>
         <div class="chart-wrap" style="height:230px;"><canvas id="winnerSectorChart"></canvas></div>
-        <div style="margin-top:.75rem;font-size:12px;color:var(--ink-3)">AI/ML's share grows from 37% → 35% in winners (roughly stable). HealthTech punches above its weight: 11% of all companies → 13% of winners. Defense/Space is the smallest by volume but nearly holds its share in winners.</div>
+        <div style="margin-top:.75rem;font-size:12px;color:var(--ink-3)">AI/ML holds roughly steady — 37% of all companies vs 34% of winners. HealthTech overtakes Cybersecurity in the winners cohort, moving from #5 by volume to #3 by winner count — the clearest sector rank reversal in the dataset.</div>
         <div class="insight" style="border-left-color:var(--tab-sectors);margin-top:.75rem">
           <div class="insight-title">HealthTech has the best volume-to-winner conversion in this dataset</div>
           <div class="insight-body">157 companies → 21 in the $100M+ tier. That's a 13.4% hit rate vs the dataset average of 11.5%. Smaller funnel, higher quality output — driven partly by longer regulatory cycles that naturally filter for more committed founders.</div>
@@ -1161,7 +1159,7 @@
     <div class="section-header"><div class="section-title">Sector deep dives</div></div>
     <div class="two-part-header">
       <div class="two-part-label all-label">Sector dynamics — full dataset</div>
-      <div class="two-part-label win-label">What winners look like in each sector</div>
+      <div class="two-part-label win-label">What high-funded companies look like in each sector</div>
     </div>
     <div class="two-part-grid">
       <div class="two-part-panel all-panel">
@@ -1192,34 +1190,34 @@
         </div>
       </div>
       <div class="two-part-panel win-panel">
-        <div class="two-part-panel-title">What separates winners in each sector</div>
+        <div class="two-part-panel-title">What separates high-funded companies in each sector</div>
         <div class="card" style="margin-bottom:.6rem">
-          <div class="card-title">AI/ML winners</div>
-          <div class="card-body" style="font-size:12px">Top AI experience on the team is 3.3× more common in AI winners than the full AI sector. Palantir alumni appear at 3× the base rate. The talent signal matters more here than in any other sector.</div>
+          <div class="card-title">AI/ML high-funded companies</div>
+          <div class="card-body" style="font-size:12px">Top AI experience on the team is 3.3× more common in AI high-funded companies than the full AI sector. Palantir alumni appear at 3× the base rate. The talent signal matters more here than in any other sector.</div>
           <div class="chips"><span class="chip chip-founders">Palantir 3× signal</span><span class="chip chip-founders">AI experience 3.3×</span></div>
         </div>
         <div class="card" style="margin-bottom:.6rem">
-          <div class="card-title">FinTech / Crypto winners</div>
-          <div class="card-body" style="font-size:12px">Best predictor: prior VC-backed founder on the team. FinTech regulations mean experienced operators matter more than in other sectors. Crypto winners skew toward infrastructure plays, not consumer apps.</div>
+          <div class="card-title">FinTech / Crypto high-funded companies</div>
+          <div class="card-body" style="font-size:12px">Best predictor: prior VC-backed founder on the team. FinTech regulations mean experienced operators matter more than in other sectors. High-funded crypto companies skew toward infrastructure plays, not consumer apps.</div>
           <div class="chips"><span class="chip chip-founders">Prior founder signal</span><span class="chip chip-sectors">FinTech / Crypto</span></div>
         </div>
         <div class="card" style="margin-bottom:.6rem">
-          <div class="card-title">Cybersecurity winners</div>
+          <div class="card-title">Cybersecurity high-funded companies</div>
           <div class="card-body" style="font-size:12px">Average funding in the $50M+ Cybersecurity cohort is higher than any other sector. Enterprise security commands large rounds. Cerca Partners as a specialist backer is a quality signal at early stages.</div>
           <div class="chips"><span class="chip chip-sectors">Cybersecurity</span><span class="chip chip-funds">Highest avg round</span></div>
         </div>
         <div class="card" style="margin-bottom:.6rem">
-          <div class="card-title">HealthTech winners</div>
-          <div class="card-body" style="font-size:12px">Elite industry experience (ex-McKinsey, BCG, Oliver Wyman) is more common in HealthTech winning teams than any other sector. Regulatory navigation requires a different kind of operator.</div>
+          <div class="card-title">HealthTech high-funded companies</div>
+          <div class="card-body" style="font-size:12px">Elite industry experience (ex-McKinsey, BCG, Oliver Wyman) is more common in HealthTech high-funded teams than any other sector. Regulatory navigation requires a different kind of operator.</div>
           <div class="chips"><span class="chip chip-founders">Consulting backgrounds</span><span class="chip chip-sectors">HealthTech</span></div>
         </div>
         <div class="card" style="margin-bottom:.6rem">
-          <div class="card-title">Defense / Space winners</div>
-          <div class="card-body" style="font-size:12px">Both a16z and Lux Capital on the cap table together is the strongest co-investment signal in this sector. Government contract experience on the team is a near-universal trait in winning companies.</div>
+          <div class="card-title">Defense / Space high-funded companies</div>
+          <div class="card-body" style="font-size:12px">Both a16z and Lux Capital on the cap table together is the strongest co-investment signal in this sector. Government contract experience on the team is a near-universal trait among high-funded companies.</div>
           <div class="chips"><span class="chip chip-funds">a16z + Lux co-invest</span><span class="chip chip-sectors">Defense / Space</span></div>
         </div>
         <div class="card">
-          <div class="card-title">CleanTech winners</div>
+          <div class="card-title">CleanTech high-funded companies</div>
           <div class="card-body" style="font-size:12px">Grant funding early is a feature, not a bug — it signals scientific credibility and extends runway while the business model matures. Sam Altman backing is the highest-signal individual indicator in this sector.</div>
           <div class="chips"><span class="chip chip-sectors">CleanTech</span><span class="chip chip-angels">Sam Altman signal</span></div>
         </div>
@@ -1250,6 +1248,12 @@
         <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--tab-winners-gold)">11.5%</div><div style="font-size:11px;color:var(--ink-3)">Of full dataset</div></div>
         <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--tab-winners-gold)">$128M</div><div style="font-size:11px;color:var(--ink-3)">Median raise (winners)</div></div>
       </div>
+    </div>
+
+    <!-- HIGH-FUNDED vs WINNER DISTINCTION NOTE -->
+    <div style="margin-top:.75rem;background:var(--surface-2);border:1px solid var(--border-2);border-radius:var(--radius-lg);padding:1rem 1.5rem">
+      <div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.5rem">A note on "high-funded" vs "winner"</div>
+      <div style="font-size:13px;color:var(--ink-2);line-height:1.7">Elsewhere on this site you'll see the term <strong style="font-weight:600;color:var(--ink)">"high-funded companies"</strong> — this refers to the broader <strong style="font-weight:600;color:var(--ink)">$50M+ funded cohort (300 companies, 21.6% of the dataset)</strong>, a separate and larger group than the $100M+ winner tier defined above. The two terms are intentionally not interchangeable: <strong style="font-weight:600;color:var(--ink)">"winner"</strong> is reserved exclusively for the $100M+ threshold, while <strong style="font-weight:600;color:var(--ink)">"high-funded"</strong> describes the wider $50M+ group used in the Fund analysis and Angel investors tabs. Watch for this distinction as you move across tabs — a chart or insight labeled "high-funded" is working with a larger, less selective sample than one labeled "winners."</div>
     </div>
   </div>
 
@@ -1290,10 +1294,10 @@
         <div class="dna-val dna-val-amber">20 avg</div>
         <div class="dna-sub">Winners average 20 investors on the cap table vs 9 overall — and 29% have 3+ top-tier funds simultaneously. This isn't just a byproduct of raising more. Winners build their cap tables deliberately as distribution, hiring, and customer networks. Cap table density is measurable from day one.</div>
       </div>
-      <div class="dna-card red-accent">
+      <div class="dna-card gold-accent">
         <div class="dna-icon">📈</div>
         <div class="dna-title">Headcount velocity: the earliest measurable signal</div>
-        <div class="dna-val" style="color:var(--red);font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1;margin-bottom:.25rem">104%</div>
+        <div class="dna-val" style="color:var(--tab-winners-gold);font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1;margin-bottom:.25rem">104%</div>
         <div class="dna-sub">Winners grow headcount at 104% year-over-year — 2.5× faster than smaller companies. LinkedIn follower growth is 91% over 90 days vs 35% overall. These signals are measurable <em>before</em> a company reaches Series B. Hiring velocity is one of the earliest publicly observable indicators of institutional momentum.</div>
       </div>
     </div>
@@ -1474,7 +1478,7 @@ const funds50 = [
 ];
 const maxFund50 = funds50[0][1];
 fill('fund-bars', funds50, ([f,c]) =>
-  `<div class="bar-row"><div class="bar-label bar-label-wide" style="font-size:12px">${f}</div><div class="bar-track"><div class="bar-fill" style="width:${Math.round(c/maxFund50*100)}%;background:${goldColor}"></div></div><div class="bar-count">${c}</div></div>`
+  `<div class="bar-row"><div class="bar-label bar-label-wide" style="font-size:12px">${f}</div><div class="bar-track"><div class="bar-fill" style="width:${Math.round(c/maxFund50*100)}%;background:${amberColor}"></div></div><div class="bar-count">${c}</div></div>`
 );
 
 // ── ANGEL TABLE (volume ranking) ─────────────────────────
@@ -1509,7 +1513,7 @@ const angelsHF = [
 ];
 const maxHF = angelsHF[0][1];
 fill('angel-hf-bars', angelsHF, ([n,c], i) =>
-  `<div class="bar-row"><div class="bar-label bar-label-med">${i+1}. ${n}</div><div class="bar-track"><div class="bar-fill" style="width:${Math.round(c/maxHF*100)}%;background:${goldColor}"></div></div><div class="bar-count">${c}</div></div>`
+  `<div class="bar-row"><div class="bar-label bar-label-med">${i+1}. ${n}</div><div class="bar-track"><div class="bar-fill" style="width:${Math.round(c/maxHF*100)}%;background:${greenColor}"></div></div><div class="bar-count">${c}</div></div>`
 );
 
 // ── WINNERS COMPARE BARS ─────────────────────────────────
@@ -1621,24 +1625,36 @@ safeChart('overviewYearChart', {
   options: chartDefaults
 });
 
-// All companies by sector — Sectors tab (left panel)
+// All companies by sector — Overview tab
 safeChart('overviewSectorChart', {
   type: 'bar',
   data: {
-    labels: ['AI/ML','FinTech','Health','Cyber','Other','Dev Tools','Defense','Clean','SaaS'],
-    datasets: [{ label: 'Companies', data: [516,235,157,199,161,70,45,44,20], backgroundColor: isDark ? '#64748b' : '#94a3b8', borderRadius: 4 }]
+    labels: ['AI/ML','FinTech','Other','Health','Cyber','Dev Tools','Defense','Clean','SaaS'],
+    datasets: [{ label: 'Companies', data: [516,235,161,157,142,70,45,44,20], backgroundColor: isDark ? '#64748b' : '#94a3b8', borderRadius: 4 }]
   },
   options: { ...chartDefaults, indexAxis: 'y',
     scales: { x: { ticks: { color: textCol }, grid: { color: gridCol } }, y: { ticks: { color: textCol, font: { size: 11 } }, grid: { color: gridCol } } }
   }
 });
 
-// Winners by sector — Sectors tab (right panel)
+// All companies by sector — Sectors tab (left panel, separate canvas)
+safeChart('sectorsAllChart', {
+  type: 'bar',
+  data: {
+    labels: ['AI/ML','FinTech','Other','Health','Cyber','Dev Tools','Defense','Clean','SaaS'],
+    datasets: [{ label: 'Companies', data: [516,235,161,157,142,70,45,44,20], backgroundColor: isDark ? '#64748b' : '#94a3b8', borderRadius: 4 }]
+  },
+  options: { ...chartDefaults, indexAxis: 'y',
+    scales: { x: { ticks: { color: textCol }, grid: { color: gridCol } }, y: { ticks: { color: textCol, font: { size: 11 } }, grid: { color: gridCol } } }
+  }
+});
+
+// Winners by sector — Sectors tab (right panel) — sorted independently, HealthTech outranks Cybersecurity here
 safeChart('winnerSectorChart', {
   type: 'bar',
   data: {
     labels: ['AI/ML','FinTech','Health','Cyber','Other','Dev Tools','Defense','Clean'],
-    datasets: [{ label: 'Winners', data: [56,25,21,18,16,9,8,7], backgroundColor: goldColor, borderRadius: 4 }]
+    datasets: [{ label: 'Winners', data: [54,25,22,18,15,9,8,8], backgroundColor: purpleColor, borderRadius: 4 }]
   },
   options: { ...chartDefaults, indexAxis: 'y',
     scales: { x: { ticks: { color: textCol }, grid: { color: gridCol } }, y: { ticks: { color: textCol, font: { size: 11 } }, grid: { color: gridCol } } }
